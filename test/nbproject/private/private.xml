@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/T:/test_btl/test/src/connectDB/ConnectDB.java</file>
-            <file>file:/T:/test_btl/test/src/Cafe_GUI/MainGUI.java</file>
-            <file>file:/T:/test_btl/test/src/gui/SP_gui.java</file>
+            <file>file:/T:/test_btl/cafe_repo/test/src/Cafe_GUI/MainGUI.java</file>
+            <file>file:/T:/test_btl/cafe_repo/test/src/Cafe_GUI/BanHang.java</file>
         </group>
     </open-files>
 </project-private>
