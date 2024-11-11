@@ -9,9 +9,10 @@ import dao.LoaiSP_Dao;
 import dao.San_Pham_Dao;
 
 public class BanHang extends JPanel {
-    private JLabel lbMaHD, lbSoLuong, lbTong, lbtitle;
+    private JLabel lbMaHD, lbSoLuong, lbTong, lbTitle, lbSelectedItems;
     private JTextField txtMaHD, txtSoLuong, txtTong;
     private JButton btnThemHD, btnXoaHD, btnThemSP, btnGiamSP;
+    private JTextArea txtSelectedItems;
     private San_Pham_Dao sp_dao;
     private LoaiSP_Dao loai_dao;
 
@@ -71,11 +72,11 @@ public class BanHang extends JPanel {
         box.setPreferredSize(new Dimension(185, 200));
 
         JLabel imageLabel = new JLabel(new ImageIcon(imagePath));
-        imageLabel.setPreferredSize(new Dimension(150, 80));
+        imageLabel.setPreferredSize(new Dimension(100, 90));
 
         JLabel priceLabel = new JLabel(String.format("Giá: %.2f", price));
 
-        JButton addButton = createButton("Cộng", e -> addOrder(price));
+        JButton addButton = createButton("Cộng", e -> addOrder(name, price));
         JButton subtractButton = createButton("Trừ", e -> removeOrder(price));
 
         box.add(imageLabel);
@@ -101,11 +102,11 @@ public class BanHang extends JPanel {
         paymentBox.setBorder(BorderFactory.createTitledBorder("Thanh toán"));
 
         paymentBox.add(Box.createVerticalStrut(10));
-        paymentBox.add(createLabelBox("Hóa đơn", new Font("Times new Roman", Font.BOLD, 25), Color.BLUE));
         paymentBox.add(Box.createVerticalStrut(10));
-        paymentBox.add(createInputBox("Mã HD: ", txtMaHD = new JTextField(10)));
-        paymentBox.add(createInputBox("Số lượng: ", txtSoLuong = new JTextField(10)));
-        paymentBox.add(createInputBox("Thành tiền: ", txtTong = new JTextField(10)));
+        txtSelectedItems = new JTextArea(10, 20);
+        txtSelectedItems.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(txtSelectedItems);
+        paymentBox.add(scrollPane);
         paymentBox.add(createButtonBox(btnThemHD = new JButton("Thêm hóa đơn"), btnXoaHD = new JButton("Hủy HĐ")));
 
         return paymentBox;
@@ -138,9 +139,10 @@ public class BanHang extends JPanel {
         return box;
     }
 
-    private void addOrder(double price) {
+    private void addOrder(String name, double price) {
         orderCount++;
         orderTotal += price;
+        txtSelectedItems.append(name + ": " + String.format("%.2f", price) + " VND\n");
         updateOrderDisplay();
     }
 
@@ -156,5 +158,4 @@ public class BanHang extends JPanel {
         txtSoLuong.setText(String.valueOf(orderCount));
         txtTong.setText(String.format("%.2f", orderTotal));
     }
-
 }
